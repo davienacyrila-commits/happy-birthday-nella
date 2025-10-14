@@ -198,6 +198,68 @@
 </head>
 
 <body>
+<!-- Efek Konfeti -->
+<canvas id="confetti" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999;"></canvas>
+
+<script>
+  function startConfetti() {
+    const canvas = document.getElementById('confetti');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const pieces = [];
+    const colors = ['#ffd6ec', '#ffe5f1', '#e3f6f5', '#fff3b0', '#e5ccff'];
+
+    for (let i = 0; i < 200; i++) {
+      pieces.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height - canvas.height,
+        size: Math.random() * 8 + 4,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        speed: Math.random() * 3 + 2,
+        rotation: Math.random() * 360,
+        rotationSpeed: Math.random() * 10 - 5
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      pieces.forEach(p => {
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.rotation * Math.PI) / 180);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+        ctx.restore();
+      });
+    }
+
+    function update() {
+      pieces.forEach(p => {
+        p.y += p.speed;
+        p.rotation += p.rotationSpeed;
+        if (p.y > canvas.height) {
+          p.y = -10;
+          p.x = Math.random() * canvas.width;
+        }
+      });
+    }
+
+    function loop() {
+      draw();
+      update();
+      requestAnimationFrame(loop);
+    }
+
+    loop();
+  }
+
+  // Jalankan konfeti setelah 7 detik halaman terbuka
+  window.addEventListener('load', () => {
+    setTimeout(startConfetti, 7000);
+  });
+</script>
 
   <!-- Tombol Back -->
   <a href="name.html" onclick="window.history.back(); return false;" class="back-button">

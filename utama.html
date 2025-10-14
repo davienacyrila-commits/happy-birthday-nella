@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Birthday Girl - October 2025</title>
+    <title>Birthday Girl</title>
     <style>
         * {
             margin: 0;
@@ -709,7 +709,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px; /* jarak antar tombol */
+    gap: 15px;
     flex-wrap: wrap;
     margin-top: 20px;
   }
@@ -761,6 +761,137 @@
 
 
     </div>
+
+    <style>
+  :root {
+    --pink: #ffd6ec;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-color: var(--pink);
+    font-family: "Poppins", sans-serif;
+  }
+
+  /* === Ikon Game === */
+  .game-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: grab;
+    z-index: 9999; /* tetap di atas tapi tidak blok area lain */
+    user-select: none;
+    touch-action: none;
+    transition: transform 0.2s ease;
+  }
+
+  .game-icon img {
+    width: 70%;
+    height: 70%;
+    border-radius: 50%;
+    object-fit: cover;
+    pointer-events: none;
+  }
+
+  .game-icon:hover {
+    transform: scale(1.1);
+  }
+
+  /* Responsif */
+  @media (max-width: 768px) {
+    .game-icon {
+      width: 65px;
+      height: 65px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .game-icon {
+      width: 60px;
+      height: 60px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Ikon Game -->
+<div class="game-icon" id="gameIcon">
+  <img src="static/assets/icon_game.png" alt="Game Icon">
+</div>
+
+<script>
+  const icon = document.getElementById("gameIcon");
+  let isDragging = false;
+  let offsetX, offsetY;
+
+  icon.addEventListener("mousedown", startDrag);
+  icon.addEventListener("touchstart", startDrag, { passive: true });
+
+  function startDrag(e) {
+    isDragging = true;
+    icon.style.cursor = "grabbing";
+
+    const rect = icon.getBoundingClientRect();
+    const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+    const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+
+    offsetX = clientX - rect.left;
+    offsetY = clientY - rect.top;
+
+    document.addEventListener("mousemove", onDrag);
+    document.addEventListener("mouseup", stopDrag);
+    document.addEventListener("touchmove", onDrag, { passive: false });
+    document.addEventListener("touchend", stopDrag);
+  }
+
+  function onDrag(e) {
+    if (!isDragging) return;
+
+    const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+    const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+
+    let x = clientX - offsetX;
+    let y = clientY - offsetY;
+
+    const maxX = window.innerWidth - icon.offsetWidth;
+    const maxY = window.innerHeight - icon.offsetHeight;
+    x = Math.max(0, Math.min(x, maxX));
+    y = Math.max(0, Math.min(y, maxY));
+
+    icon.style.left = `${x}px`;
+    icon.style.top = `${y}px`;
+    icon.style.right = "auto";
+    icon.style.bottom = "auto";
+  }
+
+  function stopDrag() {
+    isDragging = false;
+    icon.style.cursor = "grab";
+    document.removeEventListener("mousemove", onDrag);
+    document.removeEventListener("mouseup", stopDrag);
+    document.removeEventListener("touchmove", onDrag);
+    document.removeEventListener("touchend", stopDrag);
+  }
+
+  // Klik untuk pindah halaman (tanpa ganggu drag)
+  icon.addEventListener("click", function(e) {
+    if (!isDragging) {
+      window.location.href = "plate-game.html"; // Ganti ke halaman game kamu
+    }
+  });
+</script>
 </body>
 
 </html>

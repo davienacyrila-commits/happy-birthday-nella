@@ -698,11 +698,61 @@
 
         <div class="balloon" style="right: 30px; bottom: 400px;"></div>
 
-        <div class="button-container">
-    <a href="spotify.html" class="play-button">🎵 Listen to Music!</a>
-    <a href="card.html" class="open-card-button">💌 Open Card</a>
-    <a href="moment.html" class="open-card-button">🖼️ Picture</a>
-</div>
+      <div class="button-container">
+  <a href="spotify.html" class="open-card-button">🎵 Listen to Music!</a>
+  <a href="card.html" class="open-card-button">💌 Open Card</a>
+  <a href="moment.html" class="open-card-button">🖼️ Picture</a>
+      </div>
+
+<style>
+  .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px; /* jarak antar tombol */
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+
+  .button-container a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 42px; /* tinggi sama semua */
+    line-height: 1; /* biar teks rata tengah */
+    text-decoration: none;
+    padding: 0 18px;
+    font-size: 0.9rem;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #d88db8, #e0c9ff);
+    color: white;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .button-container a:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Responsif untuk layar kecil */
+  @media (max-width: 480px) {
+    .button-container {
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .button-container a {
+      height: 38px;
+      font-size: 0.8rem;
+      padding: 0 14px;
+      border-radius: 8px;
+    }
+  }
+</style>
+
 
 
         <div href="card.html" class="birthday-card">

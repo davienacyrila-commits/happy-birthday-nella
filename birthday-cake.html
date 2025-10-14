@@ -378,11 +378,23 @@
   <div style="height: 40px;"></div>
   <div style="height: 100px;"></div>
   <div class="fixed-bottom-btn"
-    style="text-align: center; position: fixed; left: 0; right: 0; bottom: 40px; z-index: 9999; margin: 0 auto;">
-    <button
-      style="padding: 12px 28px; font-size: 1.1rem; border-radius: 12px; background: linear-gradient(135deg,#d88db8,#e8a8c4); color: white; border: none; box-shadow: 0 2px 12px rgba(0,0,0,0.18); cursor: pointer; font-family: 'Lato', sans-serif; font-weight: 700;"
-      onclick="window.location.href='utama.html'">Click untuk melihat sesuatu</button>
-  </div>
+  style="text-align: center; position: fixed; left: 0; right: 0; bottom: 40px; z-index: 9999; margin: 0 auto;">
+  <button
+    style="padding: 6px 16px; font-size: 0.8rem; border-radius: 8px; background: linear-gradient(135deg,#d88db8,#e8a8c4); color: white; border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.15); cursor: pointer; font-family: 'Lato', sans-serif; font-weight: 700;"
+    onclick="window.location.href='utama.html'">
+    Click untuk melihat sesuatu
+  </button>
+</div>
+
+<style>
+  @media (max-width: 480px) {
+    .fixed-bottom-btn button {
+      padding: 5px 14px;
+      font-size: 0.75rem;
+      border-radius: 7px;
+    }
+  }
+</style>
 </body>
 <audio src="static/audio/birthday-song.mp3" autoplay loop autoplay>
   Your browser does not support the audio element.
